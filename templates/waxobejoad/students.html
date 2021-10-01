@@ -1,0 +1,21 @@
+{% extends "waxobejoad/base.html" %}
+
+{% block content %}
+
+<p>Students</p>
+
+{% for student in students %}
+	<div class="card mb-1" style="width: 24rem;">
+		<h6 class="card-header" style="height: 3em; text-align: left; vertical-align: top; color:blue">
+			<a href="{% url 'waxobejoad:student' student.id %}">{{ student }}</a>
+		</h6>
+	</div>
+{% empty %}
+	<h4>No students yet added to the database.</h4>
+{% endfor %}
+
+{% if user.is_authenticated and not user.is_staff %}
+	<h4><a href="{% url 'waxobejoad:new_student' %}">Add a new student</a></h4>
+{% endif %}
+
+{% endblock content %}

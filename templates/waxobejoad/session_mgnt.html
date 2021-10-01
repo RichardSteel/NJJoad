@@ -1,0 +1,16 @@
+{% extends "waxobejoad/base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="display-5">JOAD Session Management.</h1>
+    <p>Coaches should use this page to create new lesson schedules, assign students to the open sessions and to accept payment for the session.</p>
+    <p>The coach can also enter student information, but this is something the parent of the student is encouraged to do.</p>
+    {% if user.is_authenticated and user.is_staff %}
+        <a class="btn btn-primary" href="{% url 'waxobejoad:new_session' %}" role="button">Create new session</a>
+        <a class="btn btn-primary" href="{% url 'waxobejoad:assign_student' %}" role="button">Assign student to session</a>
+        <a class="btn btn-primary" href="{% url 'waxobejoad:list_students' %}" role="button">List students to assign</a>
+        <a class="btn btn-secondary" href="{% url 'waxobejoad:pay_invoice' %}" role="button">Pay session invoice</a>
+        <a class="btn btn-warning" href="{% url 'waxobejoad:new_student' %}" role="button">Enter student information</a>
+    {% endif %}
+</div>
+{% endblock content %}

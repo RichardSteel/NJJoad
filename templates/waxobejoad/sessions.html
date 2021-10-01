@@ -1,0 +1,18 @@
+{% extends "waxobejoad/base.html" %}
+{% block page_header %}
+	<h3>Active Session Details</h3>
+{% endblock page_header %}
+{% block content %}
+    {% for session in sessions %}
+        <div class="card mb-1" style="width:48rem; color:blue">
+            <h5 class="card-header" style="height: 3rem;">
+                {{ session }}
+            </h5>
+        {% for roster in rosters %}
+            {% if roster.session.id == session.id %}
+                <h6 class="card-body" style="color: blueviolet; height: 0rem;">{{ roster.student }}</h6>
+            {% endif %}
+        {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends "waxobejoad/base.html" %}
+{% block page_header %}
+	<h3>Archery event score for student: {{ student }}</h3>
+{% endblock page_header %}
+
+{% block content %}
+
+	<p>Please select the archery event and enter the student's score.</p>
+<div class="container">
+	<form action="{% url 'waxobejoad:save_student_score' %}"
+		method='post' class='form'>
+		{% csrf_token %}
+
+		<div class="dropdown">
+			<select class="btn btn-primary dropdown-toggle mb-4"
+			 	type="button" id="event"
+			  	data-toggle="dropdown" aria-haspopup="true"
+			   	aria-expanded="false" name="event">
+			  Archery Event
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+				{% for event in events %}
+					<option class="dropdown-item" href="#" value="{{ event.id }}">{{ event }}</option>
+				{% endfor %}
+			</div>
+			</select>
+		</div>
+<!--
+		<select class="selectpicker"
+				data-style="btn-primary"
+				name="event" id="event">
+		</select>
+-->
+		<div class="input-group mb-3">
+			<span class="input-group-text" id="distance" style="width: 10rem;">Distance to target</span>
+			<input type="text" class="form-control input-normal col-lg-1" name="distance"
+				id="distance" aria-describedby="distance" value="{{ distance }}">
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text" id="target" style="width: 10rem;">Target size</span>
+			<input type="text" class="form-control input-normal col-lg-1" name="target"
+				id="target" aria-describedby="target" value="{{ target }}">
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text" id="score" style="width: 10rem;">Score</span>
+			<input type="text" class="form-control input-normal col-lg-1" name="score"
+				id="score" aria-describedby="score">
+		</div>
+		{% buttons %}
+			<button type="submit" class="btn btn-sm btn-primary">Save score</button>
+			<input type="hidden" value="{{ student.id }}" id="student_id" name="student">
+		{% endbuttons %}
+	</form>
+</div>
+{% endblock content %}

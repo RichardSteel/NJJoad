@@ -1,0 +1,23 @@
+{% extends "waxobejoad/base.html" %}
+{% load bootstrap4 %}
+{% block page_header %}
+	<h3>Edit student information</h3>
+    <p>
+        <a href="{% url 'waxobejoad:student' student.id %}">{{ student }}</a>
+    </p>
+{% endblock page_header %}
+
+{% block content %}
+
+    <p>Edit student information:</p>
+
+    <form action="{% url 'waxobejoad:edit_student' student.id %}" method='post'
+        class="form">
+        {% csrf_token %}
+        {% bootstrap_form form layout='inline' %}
+		{% buttons %}
+			<button name="submit" class="btn btn-small btn-warning">Save changes</button>
+		{% endbuttons %}
+    </form>
+    
+{% endblock content %}

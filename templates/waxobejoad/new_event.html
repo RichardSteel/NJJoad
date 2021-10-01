@@ -1,0 +1,21 @@
+{% extends "waxobejoad/base.html" %}
+{% load bootstrap4 %}
+{% block page_header %}
+	<h3>New Archery Event</h3>
+{% endblock page_header %}
+
+{% block content %}
+
+	<p>Coaches will use this form to create a new archery event.
+	   Student scores can then be recorded against this event. 
+	   Please enter information into all fields.</p>
+
+	<form action="{% url 'waxobejoad:new_event' %}" method='post' class="form">
+		{% csrf_token %}
+		{% bootstrap_form form layout='inline' %}
+		{% buttons %}
+			<button name="submit" class="btn btn-small btn-primary">Add event</button>
+		{% endbuttons %}
+	</form>
+
+{% endblock content %}

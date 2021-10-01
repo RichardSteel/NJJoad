@@ -1,0 +1,35 @@
+{% extends "waxobejoad/base.html" %}
+
+{% block page_header %}
+    <div class="jumbotron" style="background:rgb(46, 5, 5) !important">
+        <h1 class="display-4 text-light">About WaXoBe JOAD.</h1>
+        <p class="lead text-light">WaXoBe is an archery range located in South Brunswick, New Jersey.
+            Our indoor range has a total of 20 lanes and the distance to the target is 20 yards.
+            JOAD is a training session for kids from 8 to 18 years, run by qualified coaches.</p>
+        <p class="text-light">Prior to the World pandemic, we ran two 1 hour beginner sessions on Saturday.
+            The first at 3:30pm and the second at 4:30pm. Students would sign up for a 10 week training session
+            and we would run 3 such sessions in a year.</p>
+        <p class="text-light">Given that this pandemic is not over, the new reality is that we can only
+            coach fully vaccinated students. This means, as things currently stand, the lower age for a JOAD student
+            is now 12 years of age. Due to the concerns for safety, there are no exceptions to this rule.</p>
+        {% if not user.is_authenticated %}
+            <a class="btn btn-sm btn-secondary" href="{% url 'users:register' %}" role="button">
+                Register &raquo;</a>
+        {% endif %}
+    </div>
+
+    {% for note in notes %}
+        <ul>
+            <li>{{ note }}</li>
+        </ul>
+    {% endfor %}
+    {% if user.is_authenticated and user.is_staff %}
+        <a class="btn btn-secondary" href="{% url 'waxobejoad:new_event' %}" role="button">New Archery Event</a>
+        <a class="btn btn-secondary" href="{% url 'waxobejoad:session_mgnt' %}" role="button">Sessions: Create, Assign Students, Pay Invoices</a>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <a class="btn btn-secondary" href="{% url 'waxobejoad:students' %}" role="button">All Students and Shoot Scores</a>
+        <a class="btn btn-secondary" href="{% url 'waxobejoad:sessions' %}" role="button">Session details</a>
+    {% endif %}
+{% endblock page_header %}

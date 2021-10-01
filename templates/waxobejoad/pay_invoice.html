@@ -1,0 +1,19 @@
+{% extends "waxobejoad/base.html" %}
+{% load bootstrap4 %}
+{% block page_header %}
+	<h3>Pay Invoice for Session</h3>
+{% endblock page_header %}
+
+{% block content %}
+
+	<p>Please select the archery session and the student to record payment.</p>
+
+	<form action="{% url 'waxobejoad:pay_invoice' %}" method='post' class="form">
+		{% csrf_token %}
+        {% bootstrap_form form layout='inline' %}
+		{% buttons %}
+			<button type="submit" class="btn btn-sm btn-primary">Save payment</button>
+        {% endbuttons %}
+	</form>
+
+{% endblock content %}
